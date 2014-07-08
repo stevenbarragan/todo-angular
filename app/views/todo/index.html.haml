@@ -1,0 +1,24 @@
+.container
+  %div{"ng-controller" => "TodoCtrl as todo"}
+    %table.table.table-striped
+      %thead
+        %tr
+          %th
+            Note
+          %th
+            Done?
+          %th
+            Acctions
+      %tr
+        %td
+          %input.form-control{ type: "text", ng: { keypress: "todo.inputKeyPress($event)", model: "todo.newTask.note"} }
+        %td
+        %td
+          %button.btn.btn-primary{ ng: { click: "todo.saveNew()"} } Add
+      %tr{"ng-repeat" => "task in todo.tasks | orderBy:'completed'"}
+        %td
+          {{ task.note }}
+        %td
+          %input{"ng-change" => "todo.update(task)", "ng-model" => "task.completed", type: "checkbox"}
+        %td
+          %button.btn.btn-danger{ ng: { click: "todo.delete(task)"} } Remove
