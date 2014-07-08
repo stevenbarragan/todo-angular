@@ -48,11 +48,15 @@
     return {
       restrict: 'E',
       templateUrl: '/templates/task_note.html',
-      link: function(scope, elem, attrs){
-        $(elem).find('div').bind('dblclick', function(env){
-          $scope.task.editing = true
-          // console.log(scope.task.editing);
-        })
+      link: function(scope, element, attrs){
+        $(element).find('span').click(this.updatex);
+      },
+      controller: function(){
+      },
+      updatex: function(){
+        console.log('asdf');
+        // this.task.$update();
+        // this.task.editing = false;
       }
     }
   });
