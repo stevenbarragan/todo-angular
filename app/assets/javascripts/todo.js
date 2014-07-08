@@ -31,5 +31,21 @@
         this.saveNew();
       }
     };
+
+    this.editTask = function(task){
+      console.log('editing')
+      task.editing = true
+    }
+
+    this.update_note = function(task){
+      this.update(task);
+      task.editing = false;
+    }
+
+    this.updateKeyPress = function(ev, task){
+      if(ev.which == 13){
+        this.update_note(task);
+      }
+    };
   }]);
 })();
