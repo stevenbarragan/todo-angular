@@ -27,8 +27,14 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    angularjs-rails (1.2.19)
     arel (5.0.1.20140414130214)
+    bower-rails (0.7.3)
     builder (3.2.2)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.4)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -62,6 +68,11 @@ GEM
     mime-types (1.25.1)
     minitest (5.4.0)
     multi_json (1.10.1)
+    paperclip (4.2.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     polyglot (0.3.5)
     pry (0.10.0)
       coderay (~> 1.1.0)
@@ -129,10 +140,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  angularjs-rails
+  bower-rails
   coffee-rails (~> 4.0.0)
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  paperclip
   pry-rails
   rails (= 4.1.4)
   sass-rails (~> 4.0.3)
