@@ -1,5 +1,5 @@
 (function(){
-  var app = angular.module('TodoApp', ['ngResource'])
+  var app = angular.module('TodoApp', ['ngResource', 'angularFileUpload'])
 
   app.factory('Tasks', ['$resource', function($resource) {
     return $resource('/api/v1/tasks/:id', { id: '@id' }, {
@@ -7,7 +7,7 @@
     });
   }]);
 
-  app.controller('TodoCtrl', ['Tasks', function(Tasks){
+  app.controller('TodoCtrl', ['Tasks', '$upload', function(Tasks, $upload){
     this.tasks = Tasks.query();
     this.newTask = new Tasks
 
@@ -42,18 +42,35 @@
         this.update_note(task);
       }
     };
+
+    this.onFileSelect = function($files, task) {
+      for (var i = 0; i < $files.length; i++) {
+        var file = $files[i];
+        this.upload = $upload.upload({
+          url: '/api/v1/tasks/' + task.id,
+          method: 'PUT',
+          data: {avatar: file},
+        }).progress(function(evt) {
+          console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+        }).success(function(data, status, headers, config) {
+          task = task.$get();
+        });
+      }
+    };
   }]);
+
 
   app.directive('taskNote', function(){
     return {
       restrict: 'E',
       templateUrl: '/templates/task_note.html',
-      link: function(scope, elem, attrs){
-        $(elem).find('div').bind('dblclick', function(env){
-          $scope.task.editing = true
-          // console.log(scope.task.editing);
-        })
-      }
     }
   });
+
+  app.directive('taskImage', function(){
+    return {
+      restrict: 'E',
+      template: '<image ng-src="{{task.avatar}}" ng-show="task.avatar" />'
+    };
+  })
 })();

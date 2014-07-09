@@ -12,6 +12,7 @@ gem 'angularjs-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem "paperclip"
+gem "active_model_serializers"
 
 group :develpment, :test do
     gem 'pry-rails'

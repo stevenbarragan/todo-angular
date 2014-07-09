@@ -41,7 +41,7 @@ module Api
       private
 
       def task_params
-        params.permit(:note, :completed)
+        params.permit(:note, :completed, :avatar)
       end
     end
   end

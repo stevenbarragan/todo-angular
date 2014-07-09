@@ -3,21 +3,26 @@
     %thead
       %tr
         %th
+          Done?
+        %th
           Note
         %th
-          Done?
+          Image
         %th
           Acctions
     %tr
       %td
-        %input.form-control{ type: "text", ng: { keypress: "todo.inputKeyPress($event)", model: "todo.newTask.note"} }
       %td
+        %input.form-control{ type: "text", ng: { keypress: "todo.inputKeyPress($event)", model: "todo.newTask.note"} }
       %td
         %button.btn.btn-primary{ ng: { click: "todo.saveNew()"} } Add
     %tr{"ng-repeat" => "task in todo.tasks | orderBy:'completed'"}
       %td
+        %input{"ng-change" => "todo.update(task)", "ng-model" => "task.completed", type: "checkbox"}
+      %td
         %task-note
       %td
-        %input{"ng-change" => "todo.update(task)", "ng-model" => "task.completed", type: "checkbox"}
+        %task-image
+        %input{ type: 'file', ng: { file: { select: 'todo.onFileSelect($files, task)' }}}
       %td
         %button.btn.btn-danger{ ng: { click: "todo.delete(task)"} } Remove
